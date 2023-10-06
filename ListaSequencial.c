@@ -91,7 +91,7 @@ int remove_lista_inicio(Lista *li)
 		return 0;
 	int k = 0;
 	for (k = 0; k < li->qtd - 1; k++)
-		li->dados[k] = li->dados[k + 1];
+		li->dados[k] = li->dados[k + 1]; // move todos os elementos para a esquerda
 	li->qtd--;
 	return 1;
 }
