@@ -90,7 +90,7 @@ int remove_lista_inicio(Lista *li)
 		return 0;
 	int k = 0;
 	for (k = 0; k < li->qtd - 1; k++)
-		li->dados[k] = li->dados[k + 1]; // move todos os elementos para a esquerda
+		li->dados[k] = li->dados[k + 1]; // move todos os elementos da direita para a esquerda(sobescreve a primeira posicao)
 	li->qtd--;
 	return 1;
 }
@@ -102,7 +102,7 @@ int remove_lista_final(Lista *li)
 		return 0;
 	if (li->qtd == 0)
 		return 0;
-	li->qtd--;
+	li->qtd--; // decrementa a quantidade de elemento da lista,ou seja, o ultimo elemento da lista nao faz mais parte
 	return 1;
 }
 
@@ -131,8 +131,6 @@ int insere_lista_ordenada(Lista *li, struct numeros n)
 		i++; // Incrementa o índice
 	}
 
-	if (i == li->qtd)
-		return 0;
 	// Move os elementos para abrir espaço para o novo elemento
 	for (int k = li->qtd - 1; k >= i; k--)
 	{
