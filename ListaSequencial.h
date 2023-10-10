@@ -2,15 +2,16 @@
 /*Definir:
 	- Prototipos das funcoes ;
 	- O tipo de dado armazendo na lista
-	- o pomteiro "lista"
+	- o ponteiro "lista"
 	- tamanho do vetor utilizado na lista*/
 
 #define MAX 30 // tamanho do vetor
 struct numeros
 {
-	int numero;
+	int numero; // difinicao do tipo de dado armazenado na lista
 };
-typedef struct li Lista;
+
+typedef struct li Lista; //
 
 Lista *cria_lista();
 void libera_lista(Lista *li);
@@ -25,6 +26,7 @@ int remove_lista_final(Lista *li);
 int remove_lista_inicio(Lista *li);
 int remove_lista_qualquer(Lista *li, struct numeros n);
 
+int remove_lista_posicao(Lista *li, int posicao, struct numeros n);
 int consulta_lista_posicao(Lista *li, int posicao, struct numeros n);
 
 int consulta_lista_elemento(Lista *li, int elemento, struct numeros n);

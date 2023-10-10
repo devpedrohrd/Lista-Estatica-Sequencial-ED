@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "ListaSequencial.h"
 
-struct li
+struct li // Tipo de dados "lista"
 {
 	int qtd;
 	struct numeros dados[MAX];
@@ -16,11 +16,10 @@ struct li
 // Funçao que cria a lista
 Lista *cria_lista()
 {
-	Lista *li; // declaração de um ponteiro
-	li = (Lista *)malloc(sizeof(struct li));
-	if (li != NULL)	 // se a lista nao for nula
-		li->qtd = 0; // a quantidade da lista é 0
-	return li;		 // e alista é criada
+	Lista *li = (Lista *)malloc(sizeof(struct li)); // Aloca posicao na memoria
+	if (li != NULL)									// se a lista nao for nula
+		li->qtd = 0;								// a quantidade da lista é 0
+	return li;										// e a lista é criada
 }
 
 // funçao que libera a lista;
@@ -87,7 +86,7 @@ int remove_lista_inicio(Lista *li)
 {
 	if (li == NULL)
 		return 0;
-	if (lista_cheia(li))
+	if (lista_vazia(li))
 		return 0;
 	int k = 0;
 	for (k = 0; k < li->qtd - 1; k++)
@@ -132,6 +131,8 @@ int insere_lista_ordenada(Lista *li, struct numeros n)
 		i++; // Incrementa o índice
 	}
 
+	if (i == li->qtd)
+		return 0;
 	// Move os elementos para abrir espaço para o novo elemento
 	for (int k = li->qtd - 1; k >= i; k--)
 	{
@@ -209,5 +210,28 @@ int consulta_lista_elemento(Lista *li, int elemento, struct numeros *n)
 		return 0;
 
 	*n = li->dados[i];
+	return 1;
+}
+
+int remove_lista_posicao(Lista *li, int posicao, struct numeros n)
+{
+	if (li == NULL || posicao < 0 || posicao >= li->qtd) // verifica se a lista exixte ou está cheia
+		return 0;
+
+	int i, k = 0;
+	while (i < li->qtd && li->dados[i].numero != n.numero)
+	// percorre o array até a ultima posicao ou até encontrar o numero procurado
+	{
+		i++;
+	}
+
+	if (i == li->qtd)
+		return 0;
+
+	for (k = i; k < li->qtd - 1; k++)
+	{ // move os elementos até a posicao encontrada
+		li->dados[k] = li->dados[k + 1];
+	}
+	li->qtd--; // decrementa a quantidade da lista;
 	return 1;
 }
